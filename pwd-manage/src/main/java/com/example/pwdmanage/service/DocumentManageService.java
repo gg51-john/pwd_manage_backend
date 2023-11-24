@@ -1,7 +1,7 @@
 package com.example.pwdmanage.service;
 
 import com.example.pwdmanage.entity.Document;
-import com.example.pwdmanage.entity.DocumentClient;
+import com.example.pwdmanage.model.DocumentClient;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;

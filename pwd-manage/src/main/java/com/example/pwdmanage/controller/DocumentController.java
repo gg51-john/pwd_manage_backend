@@ -1,10 +1,9 @@
 package com.example.pwdmanage.controller;
 
 import com.example.pwdmanage.entity.Document;
-import com.example.pwdmanage.entity.DocumentClient;
+import com.example.pwdmanage.model.DocumentClient;
 import com.example.pwdmanage.service.DocumentManageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +16,7 @@ public class DocumentController {
     @Autowired
     DocumentManageService documentManageService;
 
-    @CrossOrigin("http://localhost:8080")
+    @CrossOrigin("http://localhost:3000")
     @GetMapping
     @RequestMapping("/document/all")
     public List<DocumentClient> findAll() throws ExecutionException, InterruptedException {
