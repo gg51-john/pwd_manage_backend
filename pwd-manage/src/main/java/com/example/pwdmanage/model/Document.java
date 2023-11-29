@@ -1,6 +1,4 @@
-package com.example.pwdmanage.entity;
-
-import java.util.Date;
+package com.example.pwdmanage.model;
 
 public class Document {
     private String id;

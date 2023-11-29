@@ -1,7 +1,6 @@
 package com.example.pwdmanage.service;
 
-import com.example.pwdmanage.entity.Category;
-import com.example.pwdmanage.entity.Document;
+import com.example.pwdmanage.model.Category;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
@@ -14,10 +13,14 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class CategoryManageService extends ToolService {
 
-    public List<Category> findAllCategory() throws ExecutionException, InterruptedException {
+    public List<Category> findAllCategory(String uid) throws ExecutionException, InterruptedException {
         Firestore firestore = FirestoreClient.getFirestore();
 
-        ApiFuture<QuerySnapshot> future = firestore.collection("category").get();
+        CollectionReference collection = firestore.collection("category");
+        Query query = collection.whereEqualTo("uid", uid)
+                .orderBy("category");
+
+        ApiFuture<QuerySnapshot> future = query.get();
         List<QueryDocumentSnapshot> snapshots = future.get().getDocuments();
 
         List<Category> documentList = new ArrayList<>();
@@ -27,35 +30,12 @@ public class CategoryManageService extends ToolService {
         return documentList;
     }
 
-//    public void findCategory(Category category) {
-//        Firestore firestore = FirestoreClient.getFirestore();
-//        DocumentReference docRef = firestore.collection("category").whereEqualTo()
-//        ApiFuture<DocumentSnapshot> future = docRef.get();
-//
-//        DocumentSnapshot document = future.get();
-//        if (document.exists()) {
-//            return document.toObject(Document.class);
-//        } else {
-//            throw new Exception("File Not Found");
-//        }
-//    }
-
-    public void insertCategory(String categoryName) throws ExecutionException, InterruptedException {
+    public void insertCategory(Category category) throws ExecutionException, InterruptedException {
         Firestore firestore = FirestoreClient.getFirestore();
         DocumentReference documentReference = firestore.collection("category").document();
 
-        Category category = new Category();
-        category.setCategory(categoryName);
         category.setCategoryId(documentReference.getId());
         ApiFuture<WriteResult> writeResult = documentReference.set(category);
         System.out.println("Update time : " + writeResult.get().getUpdateTime());
     }
-
-//    public void updateCategory(Category category) throws ExecutionException, InterruptedException {
-//        Firestore firestore = FirestoreClient.getFirestore();
-//        DocumentReference documentReference = firestore.collection("category").document(category.getCategoryId());
-//        document.setLastUpdateDate(DateFormat());
-//        ApiFuture<WriteResult> writeResult = documentReference.set(document);
-//        System.out.println("Update time : " + writeResult.get().getUpdateTime());
-//    }
 }

@@ -1,4 +1,4 @@
-package com.example.pwdmanage.entity;
+package com.example.pwdmanage.model;
 
 public class ThirdPartyUser {
     private String id;

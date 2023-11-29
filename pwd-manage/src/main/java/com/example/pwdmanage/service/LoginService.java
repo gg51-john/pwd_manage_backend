@@ -1,6 +1,6 @@
 package com.example.pwdmanage.service;
 
-import com.example.pwdmanage.entity.ThirdPartyUser;
+import com.example.pwdmanage.model.ThirdPartyUser;
 import com.example.pwdmanage.model.ThirdPartyLoginRequest;
 import com.example.pwdmanage.model.ThirdPartyLoginResponse;
 import com.example.pwdmanage.util.JwtUtil;

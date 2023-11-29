@@ -1,11 +1,6 @@
 package com.example.pwdmanage.service;
 
-import com.example.pwdmanage.entity.ThirdPartyUser;
-import com.example.pwdmanage.model.ThirdPartyUserDetails;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.concurrent.ExecutionException;
 
 @Service
 public class UserDetailsServiceImpl {

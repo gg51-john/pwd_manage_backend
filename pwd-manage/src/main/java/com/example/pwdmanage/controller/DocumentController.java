@@ -1,8 +1,7 @@
 package com.example.pwdmanage.controller;
 
-import com.example.pwdmanage.entity.Document;
+import com.example.pwdmanage.model.Document;
 import com.example.pwdmanage.model.DocumentClient;
-import com.example.pwdmanage.model.PaginationSetting;
 import com.example.pwdmanage.service.DocumentManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,5 @@
 package com.example.pwdmanage.model;
 
-import com.example.pwdmanage.entity.Category;
-
 public class DocumentClient {
     private String id;
     private String vendor;

@@ -1,8 +1,7 @@
 package com.example.pwdmanage.service;
 
-import com.example.pwdmanage.entity.Document;
+import com.example.pwdmanage.model.Document;
 import com.example.pwdmanage.model.DocumentClient;
-import com.example.pwdmanage.model.PaginationSetting;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
@@ -24,12 +23,6 @@ public class DocumentManageService extends ToolService {
                 .orderBy("categoryInfo")
                 .orderBy("createDate");
 
-//        if (paginationSetting.getFirstPage()) {
-//            query = query.limit(paginationSetting.getLimit());
-//
-//        } else {
-//            query = query.startAfter(paginationSetting.getLastField());
-//        }
         ApiFuture<QuerySnapshot> future = query.get();
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 

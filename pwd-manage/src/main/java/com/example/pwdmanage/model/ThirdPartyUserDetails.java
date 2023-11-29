@@ -1,9 +1,5 @@
 package com.example.pwdmanage.model;
 
-import com.example.pwdmanage.entity.ThirdPartyUser;
-
-import java.util.Collection;
-
 public class ThirdPartyUserDetails  {
 //    private final ThirdPartyUser thirdPartyUser;
 //
