@@ -11,6 +11,15 @@ public class Document {
     private String lastUpdateDate;
     private String createDate;
     private Category categoryInfo;
+    private String uid;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getId() {
         return id;

@@ -2,6 +2,7 @@ package com.example.pwdmanage.controller;
 
 import com.example.pwdmanage.entity.Document;
 import com.example.pwdmanage.model.DocumentClient;
+import com.example.pwdmanage.model.PaginationSetting;
 import com.example.pwdmanage.service.DocumentManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,10 @@ public class DocumentController {
 
     @CrossOrigin("http://localhost:3000")
     @GetMapping
-    @RequestMapping("/document/all")
-    public List<DocumentClient> findAll() throws ExecutionException, InterruptedException {
-        return documentManageService.findAllDocuments();
+    @RequestMapping("/document/all/{uid}")
+    public List<DocumentClient> findAll(@PathVariable String uid)
+            throws ExecutionException, InterruptedException {
+        return documentManageService.findAllDocuments(uid);
     }
 
     @CrossOrigin("http://localhost:3000")

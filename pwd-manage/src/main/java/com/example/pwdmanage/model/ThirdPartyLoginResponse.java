@@ -2,17 +2,17 @@ package com.example.pwdmanage.model;
 
 public class ThirdPartyLoginResponse {
     private String id;
-//    private String email;
-    private String token;
-//    private Boolean newAccount;
+    private Boolean isNewUser;
+    private String key;
+    private String loginToken;
 
-//    public Boolean getNewAccount() {
-//        return newAccount;
-//    }
-//
-//    public void setNewAccount(Boolean newAccount) {
-//        this.newAccount = newAccount;
-//    }
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getId() {
         return id;
@@ -22,19 +22,19 @@ public class ThirdPartyLoginResponse {
         this.id = id;
     }
 
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-
-    public String getToken() {
-        return token;
+    public Boolean getNewUser() {
+        return isNewUser;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setNewUser(Boolean newUser) {
+        isNewUser = newUser;
+    }
+
+    public String getLoginToken() {
+        return loginToken;
+    }
+
+    public void setLoginToken(String loginToken) {
+        this.loginToken = loginToken;
     }
 }

@@ -17,6 +17,8 @@ public class LoginService {
         ThirdPartyLoginResponse response = new ThirdPartyLoginResponse();
         //查詢
         ThirdPartyUser thirdPartyUser = userService.find(request.getThirdPartyUserEmail());
+        // 產生loginToken
+        String loginToken = JwtUtil.createToken(request.getThirdPartyUserId(), request.getThirdPartyUserEmail());
         if (thirdPartyUser == null) {
             //無資料新增
             thirdPartyUser = new ThirdPartyUser();
@@ -27,24 +29,32 @@ public class LoginService {
             thirdPartyUser.setMainKey(request.getMainKey());
             thirdPartyUser.setRegistrationTime(ToolService.DateFormat());
             //設定token
-            thirdPartyUser.setToken(JwtUtil.createToken(request.getThirdPartyUserId(), request.getThirdPartyUserEmail()));
+            thirdPartyUser.setToken(loginToken);
 
             //返回
             String timeStamp = userService.insert(thirdPartyUser);
             if (timeStamp != null) {
                 response.setId(request.getThirdPartyUserId());
-                response.setToken(thirdPartyUser.getToken());
+                response.setKey(request.getMainKey());
+                response.setLoginToken(loginToken);
                 return response;
             }
-            throw new Exception("Internal Error!!");
+            throw new Exception("Internal Server Error(insert user failed)");
         }
-        //有資料更新(token、LoginTime)
-        thirdPartyUser.setToken(JwtUtil.createToken(thirdPartyUser.getThirdPartyUserId(), thirdPartyUser.getThirdPartyUserEmail()));
-        if (userService.update(thirdPartyUser)) {
+
+        //有資料
+        // =>update loginToken
+        thirdPartyUser.setToken(loginToken);
+        String timeStamp = userService.update(thirdPartyUser);
+        if (timeStamp != null) {
+            // =>比對mainKey
+            // =>給一組新的loginToken
             response.setId(thirdPartyUser.getId());
-            response.setToken(thirdPartyUser.getToken());
+            response.setKey(thirdPartyUser.getMainKey().equals(request.getMainKey()) ?
+                    thirdPartyUser.getMainKey() : null);
+            response.setLoginToken(loginToken);
             return response;
         }
-        throw new Exception("Internal Error!!");
+        throw new Exception("Internal Server Error(update loginToken failed)");
     }
 }
